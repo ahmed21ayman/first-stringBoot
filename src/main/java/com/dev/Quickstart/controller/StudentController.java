@@ -12,7 +12,7 @@ public class StudentController {
         return "all data";
     }
     @GetMapping("/top")
-    public String oneStudent(){
-        return "student one";
+    public String topStudent(){
+        return "top one";
     }
 }
