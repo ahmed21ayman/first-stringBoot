@@ -5,13 +5,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
+@RequestMapping("/students")
 public class StudentController {
-    @GetMapping("/students")
+    @GetMapping("/all")
     public String allStudents(){
         return "all data";
     }
-    @GetMapping("/student")
+    @GetMapping("/top")
     public String oneStudent(){
         return "student one";
     }
