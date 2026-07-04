@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.Quickstart.model.Student;
@@ -34,5 +35,13 @@ public class StudentController {
     @PostMapping("")
     public Student createStudent(@RequestBody Student student){
         return student;
+    }
+    @GetMapping("/search")
+    public String getStudentBySearch(@RequestParam String name){
+        return "search for : " + name;
+    }
+    @GetMapping("/filter")
+    public String  getStudentByFilter(@RequestParam String name, @RequestParam int age){
+        return name + " is " + age + " years old.";
     }
 }
