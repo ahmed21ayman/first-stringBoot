@@ -28,10 +28,6 @@ public class BookController {
         Book oneBook = new Book("ahmed", "lela w lela", 50);
         return oneBook;
     }
-    @GetMapping
-    public String getStudent(@PathVariable int id){
-        return "student id = "+ id;
-    }
     @PostMapping("")
     public Book createBook(@RequestBody Book book){
         return book;

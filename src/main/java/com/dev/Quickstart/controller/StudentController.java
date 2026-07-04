@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,8 @@ public class StudentController {
         return new Student("ayman", 23);
     }
     @GetMapping("/{id}")
-    public String getOneStudent(){
-        return "one";
+    public String getOneStudent(@PathVariable int id){
+        return "student id = "+ id;
     }
     @PostMapping("")
     public Student createStudent(@RequestBody Student student){
