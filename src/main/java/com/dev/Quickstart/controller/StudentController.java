@@ -1,18 +1,31 @@
 package com.dev.Quickstart.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dev.Quickstart.model.Student;
+
 @RestController
 @RequestMapping("/students")
 public class StudentController {
-    @GetMapping("/all")
-    public String allStudents(){
-        return "all data";
+    @GetMapping("")
+    public List<Student> getAllStudents(){
+        List<Student> students = new ArrayList<>();
+        students.add(new Student("ayman", 24));
+        students.add(new Student("omar", 20));
+        students.add(new Student("Ahmed", 30));
+        return students;
     }
     @GetMapping("/top")
-    public String topStudent(){
-        return "top one";
+    public Student getTopStudent(){
+        return new Student("ayman", 23);
+    }
+    @GetMapping("/{id}")
+    public String getOneStudent(){
+        return "one";
     }
 }
