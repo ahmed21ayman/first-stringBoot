@@ -3,6 +3,7 @@ package com.dev.Quickstart.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,5 +49,9 @@ public class StudentController {
     @PutMapping("/{id}")
     public Student updateStudent(@PathVariable int id, @RequestBody Student student){
         return student;
+    }
+    @DeleteMapping("/{id}")
+    public String deleteStudent(@PathVariable int id){
+        return "student with id : " + id + " deleted";
     }
 }
