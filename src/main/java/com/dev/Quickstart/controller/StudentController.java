@@ -15,10 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.Quickstart.model.Student;
+import com.dev.Quickstart.service.StudentService;
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
+    private final StudentService studentService;
+    public StudentController(StudentService studentService){
+        this.studentService = studentService;
+    }
+
     @GetMapping("")
     public List<Student> getAllStudents(){
         List<Student> students = new ArrayList<>();
@@ -29,8 +35,7 @@ public class StudentController {
     }
     @GetMapping("/top")
     public ResponseEntity<Student> getTopStudent(){
-        Student stu = new Student("ayman", 23);
-        return ResponseEntity.ok(stu);
+        return ResponseEntity.ok(studentService.getTopStudent());
     }
     @GetMapping("/{id}")
     public String getOneStudent(@PathVariable int id){
