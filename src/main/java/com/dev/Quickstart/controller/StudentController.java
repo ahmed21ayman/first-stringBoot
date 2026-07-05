@@ -3,6 +3,7 @@ package com.dev.Quickstart.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,16 +28,17 @@ public class StudentController {
         return students;
     }
     @GetMapping("/top")
-    public Student getTopStudent(){
-        return new Student("ayman", 23);
+    public ResponseEntity<Student> getTopStudent(){
+        Student stu = new Student("ayman", 23);
+        return ResponseEntity.ok(stu);
     }
     @GetMapping("/{id}")
     public String getOneStudent(@PathVariable int id){
         return "student id = "+ id;
     }
     @PostMapping("")
-    public Student createStudent(@RequestBody Student student){
-        return student;
+    public ResponseEntity<Student> createStudent(@RequestBody Student student){
+        return ResponseEntity.status(201).body(student);
     }
     @GetMapping("/search")
     public String getStudentBySearch(@RequestParam String name){
@@ -51,7 +53,7 @@ public class StudentController {
         return student;
     }
     @DeleteMapping("/{id}")
-    public String deleteStudent(@PathVariable int id){
-        return "student with id : " + id + " deleted";
+    public ResponseEntity<Void> deleteStudent(@PathVariable int id){
+        return ResponseEntity.noContent().build();
     }
 }
