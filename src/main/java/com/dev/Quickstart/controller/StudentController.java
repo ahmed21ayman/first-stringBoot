@@ -42,8 +42,8 @@ public class StudentController {
         return "student id = "+ id;
     }
     @PostMapping("")
-    public ResponseEntity<Student> createStudent(@RequestBody Student student){
-        return ResponseEntity.status(201).body(student);
+    public Student createStudent(@RequestBody Student student){
+        return studentService.saveStudent(student);
     }
     @GetMapping("/search")
     public String getStudentBySearch(@RequestParam String name){

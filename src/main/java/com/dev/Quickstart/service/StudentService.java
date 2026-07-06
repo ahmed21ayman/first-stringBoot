@@ -13,4 +13,7 @@ public class StudentService {
     public Student getTopStudent(){
         return new Student("Ahmed", 23);
     }
+    public Student saveStudent(Student student){
+        return studentRepository.save(student);
+    }
 }
