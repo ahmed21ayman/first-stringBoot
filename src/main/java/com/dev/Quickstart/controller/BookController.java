@@ -10,10 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.Quickstart.model.Book;
+import com.dev.Quickstart.repository.BookRepository;
+import com.dev.Quickstart.service.BookService;
 
 @RestController
 @RequestMapping("/books")
 public class BookController {
+    private final BookService bookService;
+    public BookController(BookService bookService){
+        this.bookService = bookService;
+    }
     @GetMapping("/all")
     public List<Book> getAllBooks(){
         List<Book> books = new ArrayList<>();
@@ -29,6 +35,6 @@ public class BookController {
     }
     @PostMapping("")
     public Book createBook(@RequestBody Book book){
-        return book;
+        return bookService.saveBook(book);
     }
 }
