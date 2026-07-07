@@ -32,4 +32,11 @@ public class StudentService {
         student.setId(id);
         return studentRepository.save(student);
     }
+    public boolean deleteStudent(Integer id){
+        if (!studentRepository.existsById(id)) {
+            return false;
+        }
+        studentRepository.deleteById(id);
+        return true;
+    }
 }
