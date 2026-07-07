@@ -1,6 +1,7 @@
 package com.dev.Quickstart.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import com.dev.Quickstart.model.Book;
@@ -17,5 +18,8 @@ public class BookService {
     }
     public List<Book> getAllBooks(){
         return bookRepository.findAll();
+    }
+    public Optional<Book> getBookById(Integer id){
+        return bookRepository.findById(id);
     }
 }

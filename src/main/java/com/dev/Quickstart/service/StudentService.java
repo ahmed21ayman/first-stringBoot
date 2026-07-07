@@ -1,6 +1,7 @@
 package com.dev.Quickstart.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import com.dev.Quickstart.model.Student;
@@ -20,5 +21,8 @@ public class StudentService {
     }
     public List<Student> getAllStudents(){
         return studentRepository.findAll();
+    }
+    public Optional<Student> getStudentById(Integer id){
+        return studentRepository.findById(id);
     }
 }

@@ -1,8 +1,10 @@
 package com.dev.Quickstart.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +24,9 @@ public class BookController {
     public List<Book> getAllBooks(){
         return bookService.getAllBooks();
     }
-    @GetMapping("/one")
-    public Book getOneBook(){
-        Book oneBook = new Book("ahmed", "lela w lela", 50);
-        return oneBook;
+    @GetMapping("/{id}")
+    public Optional<Book> getOneBook(@PathVariable int id){
+        return bookService.getBookById(id);
     }
     @PostMapping("")
     public Book createBook(@RequestBody Book book){

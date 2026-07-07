@@ -1,6 +1,7 @@
 package com.dev.Quickstart.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,8 +34,8 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getTopStudent());
     }
     @GetMapping("/{id}")
-    public String getOneStudent(@PathVariable int id){
-        return "student id = "+ id;
+    public Optional<Student> getOneStudent(@PathVariable int id){
+        return studentService.getStudentById(id);
     }
     @PostMapping("")
     public Student createStudent(@RequestBody Student student){
