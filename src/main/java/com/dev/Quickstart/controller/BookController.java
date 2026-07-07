@@ -1,6 +1,5 @@
 package com.dev.Quickstart.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.Quickstart.model.Book;
-import com.dev.Quickstart.repository.BookRepository;
 import com.dev.Quickstart.service.BookService;
 
 @RestController
@@ -20,13 +18,9 @@ public class BookController {
     public BookController(BookService bookService){
         this.bookService = bookService;
     }
-    @GetMapping("/all")
+    @GetMapping("")
     public List<Book> getAllBooks(){
-        List<Book> books = new ArrayList<>();
-        books.add(new Book("Alf lela w lela", "Aymoon", 200));
-        books.add(new Book("mia lila w lila", "AYMAAN", 150));
-        books.add(new Book("3shra lela w lela", "Ayman", 100));
-        return books;
+        return bookService.getAllBooks();
     }
     @GetMapping("/one")
     public Book getOneBook(){

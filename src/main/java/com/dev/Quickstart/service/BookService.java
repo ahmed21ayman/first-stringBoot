@@ -1,5 +1,7 @@
 package com.dev.Quickstart.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import com.dev.Quickstart.model.Book;
 import com.dev.Quickstart.repository.BookRepository;
@@ -12,5 +14,8 @@ public class BookService {
     }
     public Book saveBook(Book book){
         return bookRepository.save(book);
+    }
+    public List<Book> getAllBooks(){
+        return bookRepository.findAll();
     }
 }

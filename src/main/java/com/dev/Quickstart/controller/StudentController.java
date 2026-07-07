@@ -1,6 +1,5 @@
 package com.dev.Quickstart.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -27,11 +26,7 @@ public class StudentController {
 
     @GetMapping("")
     public List<Student> getAllStudents(){
-        List<Student> students = new ArrayList<>();
-        students.add(new Student("ayman", 24));
-        students.add(new Student("omar", 20));
-        students.add(new Student("Ahmed", 30));
-        return students;
+        return studentService.getAllStudents();
     }
     @GetMapping("/top")
     public ResponseEntity<Student> getTopStudent(){

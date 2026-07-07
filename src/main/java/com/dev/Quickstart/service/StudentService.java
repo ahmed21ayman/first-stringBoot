@@ -1,5 +1,7 @@
 package com.dev.Quickstart.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import com.dev.Quickstart.model.Student;
 import com.dev.Quickstart.repository.StudentRepository;
@@ -15,5 +17,8 @@ public class StudentService {
     }
     public Student saveStudent(Student student){
         return studentRepository.save(student);
+    }
+    public List<Student> getAllStudents(){
+        return studentRepository.findAll();
     }
 }
