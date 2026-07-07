@@ -3,6 +3,7 @@ package com.dev.Quickstart.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,8 +26,12 @@ public class BookController {
         return bookService.getAllBooks();
     }
     @GetMapping("/{id}")
-    public Optional<Book> getOneBook(@PathVariable int id){
-        return bookService.getBookById(id);
+    public ResponseEntity<Book> getOneBook(@PathVariable int id){
+        Optional<Book> book = bookService.getBookById(id);
+        if (book.isPresent()) {
+            return ResponseEntity.ok(book.get());
+        }
+        return ResponseEntity.notFound().build();
     }
     @PostMapping("")
     public Book createBook(@RequestBody Book book){

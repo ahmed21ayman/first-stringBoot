@@ -34,8 +34,12 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getTopStudent());
     }
     @GetMapping("/{id}")
-    public Optional<Student> getOneStudent(@PathVariable int id){
-        return studentService.getStudentById(id);
+    public ResponseEntity<Student> getOneStudent(@PathVariable int id){
+        Optional<Student> student =  studentService.getStudentById(id);
+        if (student.isPresent()) {
+            return ResponseEntity.ok(student.get());
+        }
+        return ResponseEntity.notFound().build();
     }
     @PostMapping("")
     public Student createStudent(@RequestBody Student student){
