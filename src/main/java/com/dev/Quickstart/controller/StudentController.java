@@ -54,8 +54,8 @@ public class StudentController {
         return name + " is " + age + " years old.";
     }
     @PutMapping("/{id}")
-    public Student updateStudent(@PathVariable int id, @RequestBody Student student){
-        return student;
+    public Student updateStudent(@PathVariable Integer id, @RequestBody Student student){
+        return studentService.updataStudent(id, student);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable int id){

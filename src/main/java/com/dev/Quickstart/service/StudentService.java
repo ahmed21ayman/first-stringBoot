@@ -24,5 +24,12 @@ public class StudentService {
     }
     public Optional<Student> getStudentById(Integer id){
         return studentRepository.findById(id);
+    } 
+    public Student updataStudent(Integer id, Student student){
+        if (!studentRepository.existsById(id)) {
+            return null;
+        }
+        student.setId(id);
+        return studentRepository.save(student);
     }
 }
