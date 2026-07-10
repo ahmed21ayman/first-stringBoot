@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dev.Quickstart.dto.StudentRequestDTO;
+import com.dev.Quickstart.dto.StudentResponseDTO;
 import com.dev.Quickstart.model.Student;
 import com.dev.Quickstart.service.StudentService;
 
@@ -44,8 +46,8 @@ public class StudentController {
         return ResponseEntity.notFound().build();
     }
     @PostMapping("")
-    public Student createStudent(@Valid @RequestBody Student student){
-        return studentService.saveStudent(student);
+    public StudentResponseDTO createStudent(@Valid @RequestBody StudentRequestDTO request){
+        return studentService.saveStudent(request);
     }
     @GetMapping("/search")
     public String getStudentBySearch(@RequestParam String name){

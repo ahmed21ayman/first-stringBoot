@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+
+import com.dev.Quickstart.dto.StudentRequestDTO;
+import com.dev.Quickstart.dto.StudentResponseDTO;
 import com.dev.Quickstart.model.Student;
 import com.dev.Quickstart.repository.StudentRepository;
 
@@ -16,8 +19,12 @@ public class StudentService {
     public Student getTopStudent(){
         return new Student("Ahmed", 23);
     }
-    public Student saveStudent(Student student){
-        return studentRepository.save(student);
+    public StudentResponseDTO saveStudent(StudentRequestDTO request){
+        Student student = new Student();
+        student.setName(request.getName());
+        student.setAge(request.getAge());
+        Student savedStudent = studentRepository.save(student);
+        return new StudentResponseDTO(savedStudent.getId(), savedStudent.getName(), savedStudent.getAge());
     }
     public List<Student> getAllStudents(){
         return studentRepository.findAll();
