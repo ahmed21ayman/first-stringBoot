@@ -1,7 +1,6 @@
 package com.dev.Quickstart.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +29,7 @@ public class StudentController {
     }
 
     @GetMapping("")
-    public List<Student> getAllStudents(){
+    public List<StudentResponseDTO> getAllStudents(){
         return studentService.getAllStudents();
     }
     @GetMapping("/top")
@@ -58,9 +57,15 @@ public class StudentController {
         return name + " is " + age + " years old.";
     }
     @PutMapping("/{id}")
-    public Student updateStudent(@PathVariable Integer id, @RequestBody Student student){
-        return studentService.updataStudent(id, student);
+public ResponseEntity<StudentResponseDTO> updateStudent(
+        @PathVariable Integer id,
+        @Valid @RequestBody StudentRequestDTO request){
+    StudentResponseDTO student = studentService.updateStudent(id, request);
+    if (student == null) {
+        return ResponseEntity.notFound().build();
     }
+    return ResponseEntity.ok(student);
+}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable int id){
         boolean deleted = studentService.deleteStudent(id);

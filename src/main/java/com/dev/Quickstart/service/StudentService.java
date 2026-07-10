@@ -1,5 +1,6 @@
 package com.dev.Quickstart.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,8 +27,19 @@ public class StudentService {
         Student savedStudent = studentRepository.save(student);
         return new StudentResponseDTO(savedStudent.getId(), savedStudent.getName(), savedStudent.getAge());
     }
-    public List<Student> getAllStudents(){
-        return studentRepository.findAll();
+    public List<StudentResponseDTO> getAllStudents(){
+        List<Student> students = studentRepository.findAll();
+        List<StudentResponseDTO> response = new ArrayList<>();
+    for (Student student : students) {
+        response.add(
+            new StudentResponseDTO(
+                student.getId(),
+                student.getName(),
+                student.getAge()
+            )
+        );
+    }
+    return response;
     }
     public StudentResponseDTO getStudentById(Integer id){
         Optional<Student> student = studentRepository.findById(id);
@@ -37,13 +49,23 @@ public class StudentService {
         Student s = student.get();
         return new StudentResponseDTO(s.getId(), s.getName(), s.getAge());
     } 
-    public Student updataStudent(Integer id, Student student){
-        if (!studentRepository.existsById(id)) {
-            return null;
-        }
-        student.setId(id);
-        return studentRepository.save(student);
+    public StudentResponseDTO updateStudent(
+        Integer id,
+        StudentRequestDTO request){
+    Optional<Student> optionalStudent = studentRepository.findById(id);
+    if (optionalStudent.isEmpty()) {
+        return null;
     }
+    Student student = optionalStudent.get();
+    student.setName(request.getName());
+    student.setAge(request.getAge());
+    Student updatedStudent = studentRepository.save(student);
+    return new StudentResponseDTO(
+            updatedStudent.getId(),
+            updatedStudent.getName(),
+            updatedStudent.getAge()
+    );
+}
     public boolean deleteStudent(Integer id){
         if (!studentRepository.existsById(id)) {
             return false;
