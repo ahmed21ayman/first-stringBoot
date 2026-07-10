@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dev.Quickstart.model.Student;
 import com.dev.Quickstart.service.StudentService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/students")
 public class StudentController {
@@ -42,7 +44,7 @@ public class StudentController {
         return ResponseEntity.notFound().build();
     }
     @PostMapping("")
-    public Student createStudent(@RequestBody Student student){
+    public Student createStudent(@Valid @RequestBody Student student){
         return studentService.saveStudent(student);
     }
     @GetMapping("/search")
