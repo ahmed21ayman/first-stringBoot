@@ -29,8 +29,13 @@ public class StudentService {
     public List<Student> getAllStudents(){
         return studentRepository.findAll();
     }
-    public Optional<Student> getStudentById(Integer id){
-        return studentRepository.findById(id);
+    public StudentResponseDTO getStudentById(Integer id){
+        Optional<Student> student = studentRepository.findById(id);
+        if (student.isEmpty()) {
+            return null;
+        }
+        Student s = student.get();
+        return new StudentResponseDTO(s.getId(), s.getName(), s.getAge());
     } 
     public Student updataStudent(Integer id, Student student){
         if (!studentRepository.existsById(id)) {
